@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel — Explore. Plan. Go.</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-nav glass">
+    <a class="brand" href="index.html"><span class="brand-mark">✦</span> Travel</a>
+    <nav>
+      <a href="#flights">Flights</a>
+      <a href="#hotels">Hotels</a>
+      <a href="#trips">Trips</a>
+      <a href="ai.html" class="ai-nav">✦ Aira AI</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="login-link" href="login.html">Login</a>
+      <a class="btn btn-dark small" href="login.html?mode=signup">Sign up</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <span class="eyebrow">YOUR JOURNEY STARTS HERE</span>
+        <h1>Explore the world.<br><em>We'll plan the rest.</em></h1>
+        <p>Flights, hotels, experiences and an AI trip planner — everything you need for your next adventure.</p>
+        <div class="hero-buttons">
+          <a class="btn btn-primary" href="ai.html">Plan with Aira AI <span>→</span></a>
+          <a class="btn btn-light" href="#search">Search a trip</a>
+        </div>
+      </div>
+
+      <div class="quick-search glass" id="search">
+        <div class="search-tabs">
+          <button class="active" data-type="flight">✈ Flights</button>
+          <button data-type="hotel">▣ Hotels</button>
+          <button data-type="trip">◎ Holidays</button>
+        </div>
+        <div class="search-grid">
+          <label>From<input id="from" value="New Delhi" placeholder="Departure city"></label>
+          <label>To<input id="to" value="Mumbai" placeholder="Arrival city"></label>
+          <label>Departure<input type="date" id="depart"></label>
+          <label>Return<input type="date" id="returnDate"></label>
+          <label>Travellers<select id="travellers"><option>1 Traveller</option><option>2 Travellers</option><option>3 Travellers</option><option>4 Travellers</option></select></label>
+          <button class="btn btn-primary search-btn" onclick="runSearch()">Search</button>
+        </div>
+        <div class="search-note"><span>●</span> Flexible dates available &nbsp; • &nbsp; Economy class</div>
+      </div>
+    </section>
+
+    <section class="section" id="flights">
+      <div class="section-heading"><div><span class="eyebrow dark">TRAVEL SMART</span><h2>Everything for your journey</h2></div><a href="ai.html">Let Aira plan it →</a></div>
+      <div class="feature-grid">
+        <article class="feature-card"><div class="icon purple">✈</div><h3>Flights</h3><p>Compare routes, times and fares for your next trip.</p><button onclick="searchSection('flight')">Search flights →</button></article>
+        <article class="feature-card" id="hotels"><div class="icon green">⌂</div><h3>Hotels</h3><p>Find stays that fit your budget, location and style.</p><button onclick="searchSection('hotel')">Explore hotels →</button></article>
+        <article class="feature-card"><div class="icon orange">◈</div><h3>Experiences</h3><p>Discover attractions, food, culture and local activities.</p><button onclick="openExperienceSearch()">Discover places →</button></article>
+        <article class="feature-card"><div class="icon blue">✦</div><h3>Aira AI</h3><p>Tell Aira what you want and get a complete trip plan in seconds.</p><a href="ai.html">Open Aira →</a></article>
+      </div>
+    </section>
+
+    <section class="section soft" id="trips">
+      <div class="section-heading"><div><span class="eyebrow dark">POPULAR NOW</span><h2>Trip ideas</h2></div></div>
+      <div class="destination-grid">
+        <button class="destination" onclick="goAI('Plan a 3 day trip to Jaipur for two people')"><span class="destination-photo jaipur"></span><strong>Jaipur</strong><small>3 days · Culture & food</small></button>
+        <button class="destination" onclick="goAI('Plan a 4 day trip to Goa for friends')"><span class="destination-photo goa"></span><strong>Goa</strong><small>4 days · Beaches & nightlife</small></button>
+        <button class="destination" onclick="goAI('Plan a 5 day trip to Manali for family')"><span class="destination-photo manali"></span><strong>Manali</strong><small>5 days · Mountains & adventure</small></button>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div><span class="eyebrow">MEET YOUR TRAVEL ASSISTANT</span><h2>Ask Aira anything about your trip.</h2><p>From “where should I go?” to a complete day-by-day itinerary with flights, hotels and a budget.</p></div>
+      <a class="btn btn-light" href="ai.html">Chat with Aira AI →</a>
+    </section>
+  </main>
+
+  <footer><div class="brand">✦ Travel</div><span>Explore. Plan. Go.</span><span>© 2026 Travel</span></footer>
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>

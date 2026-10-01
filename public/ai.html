@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aira AI — Travel</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="ai-page">
+  <header class="site-nav glass dark-nav">
+    <a class="brand" href="index.html"><span class="brand-mark">✦</span> Travel</a>
+    <nav><a href="index.html">Home</a><a href="index.html#flights">Flights</a><a href="index.html#hotels">Hotels</a><a class="active-nav" href="ai.html">✦ Aira AI</a></nav>
+    <div class="nav-actions"><a class="login-link" href="login.html">Login</a><a class="btn btn-light small" href="login.html?mode=signup">Sign up</a></div>
+  </header>
+
+  <main class="ai-layout">
+    <aside class="chat-panel">
+      <div class="chat-head"><div class="aira-avatar">✦</div><div><strong>Aira AI</strong><small>Your personal trip planner</small></div><span class="online">●</span></div>
+      <div class="chat-messages" id="messages">
+        <div class="message bot"><span class="avatar">✦</span><div><strong>Aira AI</strong><p>Hello! I'm Aira, your Travel AI. Tell me where you want to go, how many days, who you're travelling with, your dates and your budget — I'll build the trip for you.</p><time>Now</time></div></div>
+        <div class="suggestions">
+          <button onclick="sendSuggestion('Plan a 3 day trip to Jaipur for family')">3-day Jaipur trip</button>
+          <button onclick="sendSuggestion('Plan a 4 day trip to Goa with friends')">Goa with friends</button>
+          <button onclick="sendSuggestion('Find a budget trip to Manali for 5 days')">Budget Manali</button>
+        </div>
+      </div>
+      <div class="chat-input-wrap">
+        <input id="chatInput" placeholder="Ask Aira anything about your trip..." onkeydown="if(event.key==='Enter') sendChat()">
+        <button class="send" onclick="sendChat()">➤</button>
+      </div>
+      <div class="chat-footer">Aira can suggest itineraries, flights, hotels, activities and estimated budgets.</div>
+    </aside>
+
+    <section class="results-panel">
+      <div class="results-top"><div><span class="eyebrow dark">AI TRIP PLANNER</span><h1 id="resultTitle">Your trip workspace</h1><p id="resultSubtitle">Your itinerary, flights, hotels and package appear here.</p></div><button class="icon-btn" onclick="resetTrip()">↻</button></div>
+      <div class="tabs">
+        <button class="active" data-tab="itinerary" onclick="showTab('itinerary',this)">🗓 Itinerary</button>
+        <button data-tab="flights" onclick="showTab('flights',this)">✈ Flights</button>
+        <button data-tab="hotels" onclick="showTab('hotels',this)">⌂ Hotels</button>
+        <button data-tab="package" onclick="showTab('package',this)">◈ Package</button>
+      </div>
+
+      <div id="itinerary" class="result-tab active-tab">
+        <div class="map-card"><div class="fake-map"><span class="map-route"></span><span class="pin p1">📍</span><span class="pin p2">📍</span><span class="pin p3">📍</span><div class="map-label">TRIP ROUTE</div></div><div class="map-side"><span class="pill">3 DAYS</span><h3 id="mapDestination">Jaipur</h3><p>Day-by-day route with smart timing, local highlights and travel breaks.</p><button onclick="openGoogleMaps(document.getElementById('mapDestination')?.textContent || 'travel destination')">Open map view →</button></div></div>
+        <div class="day-list" id="dayList"></div>
+      </div>
+
+      <div id="flights" class="result-tab">
+        <div class="result-toolbar"><input placeholder="Search flights..."><button onclick="showHotelFilters()">⚙ Filters</button><button onclick="sortFlightCards()">↕ Sort</button></div>
+        <div class="flight-card"><span class="air-logo">✈</span><div><strong>IndiGo</strong><small>6E-6210 · 1 stop</small></div><div class="route"><strong>07:00</strong><small>BHO · 1 Oct</small></div><b>→</b><div class="route"><strong>16:45</strong><small>JAI · 1 Oct</small></div><div class="price"><small>from</small><strong>₹8,035</strong><button onclick="addTravelItem({type:'flight',name:'Flight option',price:0})">Add to Trip</button></div></div>
+        <div class="flight-card"><span class="air-logo">✈</span><div><strong>Air India</strong><small>AI-1886 · 1 stop</small></div><div class="route"><strong>08:25</strong><small>BHO · 1 Oct</small></div><b>→</b><div class="route"><strong>13:00</strong><small>JAI · 1 Oct</small></div><div class="price"><small>from</small><strong>₹12,735</strong><button onclick="addTravelItem({type:'flight',name:'Flight option',price:0})">Add to Trip</button></div></div>
+      </div>
+
+      <div id="hotels" class="result-tab">
+        <div class="result-toolbar"><input placeholder="Search hotels..."><button onclick="showHotelFilters()">⚙ Filters</button></div>
+        <div class="hotel-grid">
+          <article class="hotel"><div class="hotel-img h1"></div><div class="hotel-body"><span class="rating">4.4 ★</span><h3>Royal Heritage Haveli</h3><p>Jaipur, Vaishali Nagar</p><div class="hotel-meta">Breakfast · Pool · 4 rooms left</div><strong>₹6,484 <small>/ night</small></strong><button onclick="addTravelItem({type:'hotel',name:this.closest('.hotel')?.querySelector('h3')?.textContent || 'Hotel',price:0})">Add to Trip</button></div></article>
+          <article class="hotel"><div class="hotel-img h2"></div><div class="hotel-body"><span class="rating">4.5 ★</span><h3>TGI Apple Inn</h3><p>Jaipur, Ajmer Road</p><div class="hotel-meta">Breakfast · Pool · 7 rooms left</div><strong>₹6,767 <small>/ night</small></strong><button onclick="addTravelItem({type:'hotel',name:this.closest('.hotel')?.querySelector('h3')?.textContent || 'Hotel',price:0})">Add to Trip</button></div></article>
+          <article class="hotel"><div class="hotel-img h3"></div><div class="hotel-body"><span class="rating">4.1 ★</span><h3>Park Prime</h3><p>Jaipur, C Scheme</p><div class="hotel-meta">Breakfast · Pool · 5 rooms left</div><strong>₹9,824 <small>/ night</small></strong><button onclick="addTravelItem({type:'hotel',name:this.closest('.hotel')?.querySelector('h3')?.textContent || 'Hotel',price:0})">Add to Trip</button></div></article>
+        </div>
+      </div>
+
+      <div id="package" class="result-tab">
+        <div class="package-head"><div><span>PACKAGE RECOMMENDED BY AIRA</span><strong id="packageTotal">₹41,804</strong><small>Flights + stays + experiences</small></div><div class="package-breakdown"><span>✈ Flights <b>₹28,070</b></span><span>⌂ Hotels <b>₹6,767</b></span><span>✦ Other <b>₹6,967</b></span></div></div>
+        <div class="selected-items"><h2>Recommended package</h2><div class="selected-row"><span>✈</span><div><strong>Round-trip flights</strong><small>Flexible economy fare</small></div><b>₹28,070</b></div><div class="selected-row"><span>⌂</span><div><strong>3 nights stay</strong><small>Breakfast included</small></div><b>₹6,767</b></div><div class="selected-row"><span>✦</span><div><strong>Activities & meals</strong><small>Estimated local expenses</small></div><b>₹6,967</b></div><button class="btn btn-primary book-btn" onclick="saveCurrentTrip(lastTripPayload || window.lastTripPayload)">Add package to trip — ₹41,804</button></div>
+      </div>
+    </section>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>

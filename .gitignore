@@ -1,0 +1,9 @@
+node_modules/
+.env
+.env.*
+!.env.example
+
+*.log
+travel.db
+travel.db-shm
+travel.db-wal

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel — Login</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="auth-page">
+  <header class="auth-nav">
+    <a class="brand" href="index.html"><span class="brand-mark">✦</span> Travel</a>
+    <a href="index.html">← Back to Travel</a>
+  </header>
+  <main class="auth-wrap">
+    <section class="auth-visual">
+      <div class="auth-copy"><span class="eyebrow">TRAVEL YOUR WAY</span><h1>Your next story<br><em>starts here.</em></h1><p>Save trips, manage bookings and let Aira remember your travel preferences.</p></div>
+    </section>
+    <section class="auth-card">
+      <div class="auth-switch"><button id="loginTab" class="active" onclick="setAuth('login')">Login</button><button id="signupTab" onclick="setAuth('signup')">Sign up</button></div>
+      <div id="loginForm">
+        <div class="mini-logo">✦</div><h2>Welcome back</h2><p class="muted">Glad to see you again 👋</p>
+        <button class="google" onclick="demoToast('Google sign-in demo')">G <span>Continue with Google</span></button>
+        <div class="or"><span>or</span></div>
+        <label>Email<input type="email" id="loginEmail" placeholder="enter email..."></label>
+        <label>Password<input type="password" id="loginPassword" placeholder="enter password..."></label>
+        <button class="btn btn-primary full" onclick="login()">Login</button>
+        <p class="switch-text">Don't have an account? <button onclick="setAuth('signup')">Sign up for Free</button></p>
+      </div>
+      <div id="signupForm" hidden>
+        <div class="mini-logo">✦</div><h2>Create account</h2><p class="muted">Enter your details to get started.</p>
+        <div class="two-col"><label>First name<input id="signupFirstName" placeholder="enter..."></label><label>Last name<input id="signupLastName" placeholder="enter..."></label></div>
+        <div class="two-col"><label>Email<input id="signupEmail" type="email" placeholder="example@gmail.com"></label><label>Phone number<input id="signupPhone" placeholder="+91 ..."></label></div>
+        <div class="two-col"><label>Date of birth<input id="signupDob" type="date"></label><label>Nationality<select id="signupNationality"><option>India 🇮🇳</option><option>Brazil 🇧🇷</option><option>USA 🇺🇸</option><option>UK 🇬🇧</option></select></label></div>
+        <div class="two-col"><label>ID type<select id="signupIdType"><option>Select</option><option>Passport</option><option>Driving License</option></select></label><label>ID number<input id="signupIdNumber" placeholder="enter..."></label></div>
+        <div class="two-col"><label>Password<input id="signupPassword" type="password" placeholder="enter..."></label><label>Confirm password<input id="signupConfirmPassword" type="password" placeholder="enter..."></label></div>
+        <button class="btn btn-primary full" onclick="signup()">Create account</button>
+        <p class="switch-text">Already have an account? <button onclick="setAuth('login')">Login</button></p>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
